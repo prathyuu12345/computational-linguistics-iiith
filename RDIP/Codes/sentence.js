@@ -1,3 +1,5 @@
+var button_cnt;
+var hin_btn;
 function array() {
 var e = document.getElementById("ar");
 var strUser = e.options[e.selectedIndex].text;
@@ -9,6 +11,14 @@ document.getElementById("reform").style.display='';
 document.getElementById("ref").style.display='';
 document.getElementById('b').innerHTML="";
 document.getElementById('i').innerHTML="";
+document.getElementById('c').style.display ="none";
+  document.getElementById('d').style.display ="none"; 
+  hin_btn=0;
+  button_cnt=0;
+  hin2=0;
+  word_cnt=0;
+  sentence="";
+  hin_sentence="";
 for(var i=0;i<=9;i++){
 var k=i+'';
 var k2=i+'h';
@@ -38,12 +48,13 @@ array[9]=["the teacher returned the book after she noticed the error","the teach
 array[10]=["I told her that I bought a book yesterday","I told her yesterday that I bought a book","yesterday I told her that I bought a book","I bought a book that I told her yesterday","I bought a book yesterday that I told her","yesterday I bought a book that I told her"];
 var x = Math.floor((Math.random() * 10) + 1);
 var res=shuffle(array[x][0]);
-//document.getElementById('selected_sentence').value=res
+
 var words = res.split(" ");
 var l=words.length;
 for (var i = 0; i <l; i++) {
 words[i] += " ";
 }
+
 for( var i=0;i<l;i++){
 var butid=i+'b'
 var element = document.createElement("input");
@@ -53,6 +64,7 @@ element.setAttribute('id',butid)
 var foo = document.getElementById(i+'');
 foo.appendChild(element);
 }  
+button_cnt=l;
 }
 else if(strUser=="Hindi"){
 document.getElementById("h2id").innerHTML="";
@@ -88,6 +100,8 @@ element.setAttribute('id',butid)
 var foo = document.getElementById(i+'h');
 foo.appendChild(element);
 }
+hin_btn=l;
+
 }
 }
 function getRandomInt(n) {
@@ -104,11 +118,17 @@ arr[j] = temp;
 }
 return arr.join(' ');              
 }
+var word_cnt=0;
+var sentence="";
 function sec(clicked){
+  document.getElementById('c').innerHTML ="";
+document.getElementById('d').innerHTML ="";
+  document.getElementById('d').style.display ="none";
+  document.getElementById('c').style.display ="none";
   document.getElementById('reform').style.display = '';
   document.getElementById('b').style.display = '';
   document.getElementById('i').style.display = '';
-var function_count = document.getElementById('start_function_count').value
+
 document.getElementById('b').innerHTML="Formed Sentence";
 document.getElementById('i').innerHTML=" (after selecting words):"; 
 document.getElementById('reform').innerHTML="";
@@ -121,33 +141,40 @@ element.setAttribute("id", "reformbtn");
 var foo = document.getElementById("reform");
 foo.appendChild(element);
 document.getElementById('reformbtn').setAttribute( "onClick", "javascript: reform_sentence()" );
- 
-document.getElementById('start_function_count').value='1'
 
 var clickid=clicked+'b'
+sentence+=document.getElementById(clickid).value;
+
 document.getElementById('h2id').innerHTML+=document.getElementById(clickid).value;
 document.getElementById(clickid).style.display = 'none';
-}
-function reform_sentence()
-{
-document.getElementById('h2id').innerHTML=''
-for(var i=0;i<9;i++){
-var clickid=i+"b"
-document.getElementById('b').innerHTML="Formed Sentence";
-document.getElementById('i').innerHTML=" (after selecting words):";
-document.getElementById(i+'').style.display = '';  
-document.getElementById(clickid).style.display = '';
-document.getElementById('i').style.display = "none";
-document.getElementById('b').style.display = "none";
-document.getElementById('reform').style.display = "none";
-}
+word_cnt++;
 
+if(word_cnt==button_cnt){
+
+  document.getElementById('c').style.display='';
+
+ var element = document.createElement("input");
+element.setAttribute("type", 'button');
+element.setAttribute("value", "Check the correctness of this sentence");
+element.setAttribute("id", "correct");
+var foo = document.getElementById("c");
+foo.appendChild(element);
+
+word_cnt=0;
+sentence="";
 }
+}
+var hin_sentence="";
+var hin2=0;
 function hin(clicked){
+  document.getElementById('d').innerHTML ="";
+  document.getElementById('c').innerHTML ="";
+  document.getElementById('c').style.display ="none";
+  document.getElementById('d').style.display ="none"; 
   document.getElementById('ref').style.display = '';
   document.getElementById('b').style.display = '';
   document.getElementById('i').style.display = '';
-var function_count = document.getElementById('selected_sentence').value
+
 document.getElementById('b').innerHTML="Formed Sentence";
 document.getElementById('i').innerHTML=" (after selecting words):"; 
 document.getElementById('reform').innerHTML="";
@@ -160,13 +187,28 @@ var foo = document.getElementById("ref");
 foo.appendChild(element);
 document.getElementById('reformbtnhin').setAttribute( "onClick", "javascript: reform_hin_sentence()" );
  
-document.getElementById('selected_sentence').value='1'
 
 
 var clickid=clicked+'x'
-//alert(clickid);
+hin_sentence+=document.getElementById(clickid).value;
+
 document.getElementById('h2h').innerHTML+=document.getElementById(clickid).value;
+
 document.getElementById(clickid).style.display = 'none';
+hin2++;
+
+if(hin2==hin_btn){
+  document.getElementById('d').style.display ='';
+ var element = document.createElement("input");
+element.setAttribute("type", 'button');
+element.setAttribute("value", "Check the correctness of this sentence");
+element.setAttribute("id", "correct_hin");
+var foo = document.getElementById("d");
+foo.appendChild(element);
+
+hin2=0;
+hin_sentence="";
+}
 }
 
 function reform_hin_sentence()
@@ -181,7 +223,26 @@ document.getElementById(clickid).style.display = '';
 document.getElementById('i').style.display = "none";
 document.getElementById('b').style.display = "none";
 document.getElementById('ref').style.display = "none";
+document.getElementById('d').style.display="none";
+document.getElementById('c').style.display="none";
 }
-//document.getElementById('ref').style.display = '';
+
+}
+function reform_sentence()
+{
+document.getElementById('h2id').innerHTML=''
+for(var i=0;i<9;i++){
+var clickid=i+"b"
+document.getElementById('b').innerHTML="Formed Sentence";
+document.getElementById('i').innerHTML=" (after selecting words):";
+document.getElementById(i+'').style.display = '';  
+document.getElementById(clickid).style.display = '';
+document.getElementById('i').style.display = "none";
+document.getElementById('b').style.display = "none";
+document.getElementById('reform').style.display = "none";
+document.getElementById('c').style.display="none";
+document.getElementById('d').style.display="none";
+
+}
 
 }
