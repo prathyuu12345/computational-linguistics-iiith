@@ -28,6 +28,9 @@ var k2=i+'h';
 document.getElementById(k).innerHTML="";
 document.getElementById(k2).innerHTML="";
 }
+if(strUser=="---select a language---"){
+  alert("select language");
+}
 if(strUser=="English"){
   array1=[["John ate an apple before afternoon","before afternoon John ate an apple","John before afternoon ate an apple"],
 ["some students like to study in the night","at night some students like to study"],
