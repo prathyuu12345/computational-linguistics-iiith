@@ -257,12 +257,9 @@ document.getElementById('d').style.display="none";
 document.getElementById('right').style.display="none";
 document.getElementById('get_correct').innerHTML="";
 document.getElementById("answers").innerHTML="";
-
 word_cnt=0;
 sentence="";
-
 }
-
 }
 function check_correctness() {
   document.getElementById("right").innerHTML="";
@@ -284,10 +281,8 @@ function check_correctness() {
   document.getElementById("right").innerHTML="<p style='color:red'>Wrong answer!!!</p>";
   document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='get_answers()'>get correct sentence</button>"
  document.getElementById("answers").innerHTML="";
-
 }
 function hin_correctness(){
-  
   document.getElementById("right").innerHTML="";
   var txt=hin_sentence.trim(); 
   var q=array2[y].length;
