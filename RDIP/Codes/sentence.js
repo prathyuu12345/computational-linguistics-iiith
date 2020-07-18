@@ -19,6 +19,10 @@ document.getElementById('c').style.display ="none";
   document.getElementById('d').style.display ="none"; 
   document.getElementById("right").style.display="none";
   document.getElementById("wrong").style.display="none";
+  document.getElementById('get_correct').style.display="none";
+  document.getElementById('hin_correct_sen').style.display="none";
+  document.getElementById('get_correct').innerHTML="";
+  document.getElementById('hin_correct_sen').innerHTML="";
   hin2=0;
   word_cnt=0;
   sentence="";
@@ -234,6 +238,11 @@ document.getElementById('ref').style.display = "none";
 document.getElementById('d').style.display="none";
 document.getElementById('c').style.display="none";
 document.getElementById('wrong').style.display="none";
+document.getElementById('right').style.display="none";
+document.getElementById('hin_correct_sen').style.display="none";
+document.getElementById('get_correct').style.display="none";
+document.getElementById('get_correct').innerHTML="";
+document.getElementById('hin_correct_sen').innerHTML="";
 hin2=0;
 hin_sentence="";
 }
@@ -254,6 +263,11 @@ document.getElementById('reform').style.display = "none";
 document.getElementById('c').style.display="none";
 document.getElementById('d').style.display="none";
 document.getElementById('right').style.display="none";
+document.getElementById('wrong').style.display="none";
+document.getElementById('get_correct').style.display="none";
+document.getElementById('hin_correct_sen').style.display="none";
+document.getElementById('get_correct').innerHTML="";
+document.getElementById('hin_correct_sen').innerHTML="";
 word_cnt=0;
 sentence="";
 
@@ -265,6 +279,7 @@ function check_correctness() {
   document.getElementById("right").style.display='';
   document.getElementById("wrong").innerHTML="";
   document.getElementById("wrong").style.display='';
+  document.getElementById('get_correct').style.display='';
   var txt=sentence.trim();
   var q=array1[x].length;
   var m=0;
@@ -279,12 +294,20 @@ function check_correctness() {
     
  }
   document.getElementById("wrong").innerHTML="Wrong answer!!!";
+   var element = document.createElement("input");
+element.setAttribute("type", 'button');
+element.setAttribute("value", "Get Correct Sentence");
+element.setAttribute("id", "correct_sentence");
+var foo = document.getElementById("get_correct");
+foo.appendChild(element);
+
 }
 function hin_correctness(){
   document.getElementById("wrong").innerHTML="";
   document.getElementById("wrong").style.display='';
   document.getElementById("right").innerHTML="";
   document.getElementById("right").style.display='';
+  document.getElementById('hin_correct_sen').style.display='';
   var txt=hin_sentence.trim(); 
   var q=array2[y].length;
   var m=0;
@@ -297,5 +320,11 @@ function hin_correctness(){
     } 
  }
   document.getElementById("wrong").innerHTML="Wrong answer!!!";
+   var element = document.createElement("input");
+element.setAttribute("type", 'button');
+element.setAttribute("value", "Get Correct Sentence");
+element.setAttribute("id", "correct_sentence2");
+var foo = document.getElementById("hin_correct_sen");
+foo.appendChild(element);
 
 }
