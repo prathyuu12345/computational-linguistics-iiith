@@ -3,26 +3,21 @@ var hin_btn;
 var x,y;
 var array1;
 var array2;
-
+var strUser
 function array() {
 var e = document.getElementById("ar");
-var strUser = e.options[e.selectedIndex].text;
+strUser = e.options[e.selectedIndex].text;
 document.getElementById("r").innerHTML="Form a sentence (Declarative or Interrogative or any other type) from the given words";
 document.getElementById("s").innerHTML="(select the buttons in proper order)";
 document.getElementById('reform').innerHTML="";  
 document.getElementById('ref').innerHTML="";
-document.getElementById("reform").style.display='';
-document.getElementById("ref").style.display='';
 document.getElementById('b').innerHTML="";
 document.getElementById('i').innerHTML="";
-document.getElementById('c').style.display ="none";
-  document.getElementById('d').style.display ="none"; 
-  document.getElementById("right").style.display="none";
-  document.getElementById("wrong").style.display="none";
-  document.getElementById('get_correct').style.display="none";
-  document.getElementById('hin_correct_sen').style.display="none";
+document.getElementById('c').innerHTML ="";
+  document.getElementById('d').innerHTML =""; 
+  document.getElementById("right").innerHTML="";
   document.getElementById('get_correct').innerHTML="";
-  document.getElementById('hin_correct_sen').innerHTML="";
+  document.getElementById('answers').innerHTML="";
   hin2=0;
   word_cnt=0;
   sentence="";
@@ -53,7 +48,7 @@ var p=i+'h';
 var p2=i+'';
 document.getElementById(p).style.display = 'none';
 document.getElementById(p2).style.display = '';
-//document.getElementById(p2).innerHTML="";
+
 }
 x = Math.floor(Math.random() * 10);
 var res=shuffle(array1[x][0]);
@@ -65,7 +60,6 @@ words[i] += " ";
 }
 
 for( var i=0;i<l;i++){
-  //alert(x);
 var butid=i+'b'
 var element = document.createElement("input");
 element.setAttribute("type", 'button');
@@ -73,7 +67,6 @@ element.setAttribute("value", words[i]);
 element.setAttribute('id',butid)
 var foo = document.getElementById(i+'');
 foo.appendChild(element);
-//alert(words[i]);
 }  
 button_cnt=l;
 }
@@ -94,7 +87,6 @@ for( var i=0;i<=9;i++){
   var r2=i+'h';
   document.getElementById(r).style.display = 'none';
   document.getElementById(r2).style.display = '';
-  //document.getElementById(r2).innerHTML="";
 }
  y = Math.floor(Math.random() * 7);
 
@@ -114,7 +106,6 @@ element.setAttribute("value", words[i]);
 element.setAttribute('id',butid)
 var foo = document.getElementById(i+'h');
 foo.appendChild(element);
-//alert(words[i]);
 }
 hin_btn=l1
 
@@ -237,12 +228,10 @@ document.getElementById('b').style.display = "none";
 document.getElementById('ref').style.display = "none";
 document.getElementById('d').style.display="none";
 document.getElementById('c').style.display="none";
-document.getElementById('wrong').style.display="none";
 document.getElementById('right').style.display="none";
-document.getElementById('hin_correct_sen').style.display="none";
-document.getElementById('get_correct').style.display="none";
 document.getElementById('get_correct').innerHTML="";
-document.getElementById('hin_correct_sen').innerHTML="";
+document.getElementById("answers").innerHTML="";
+
 hin2=0;
 hin_sentence="";
 }
@@ -263,11 +252,9 @@ document.getElementById('reform').style.display = "none";
 document.getElementById('c').style.display="none";
 document.getElementById('d').style.display="none";
 document.getElementById('right').style.display="none";
-document.getElementById('wrong').style.display="none";
-document.getElementById('get_correct').style.display="none";
-document.getElementById('hin_correct_sen').style.display="none";
 document.getElementById('get_correct').innerHTML="";
-document.getElementById('hin_correct_sen').innerHTML="";
+document.getElementById("answers").innerHTML="";
+
 word_cnt=0;
 sentence="";
 
@@ -276,10 +263,6 @@ sentence="";
 }
 function check_correctness() {
   document.getElementById("right").innerHTML="";
-  document.getElementById("right").style.display='';
-  document.getElementById("wrong").innerHTML="";
-  document.getElementById("wrong").style.display='';
-  document.getElementById('get_correct').style.display='';
   var txt=sentence.trim();
   var q=array1[x].length;
   var m=0;
@@ -288,26 +271,21 @@ function check_correctness() {
   
     var m=str.localeCompare(txt);
     if(m==0){
-      document.getElementById("right").innerHTML="Right answer!!!";
+      document.getElementById("right").style.display='';
+      document.getElementById("right").innerHTML="<p style='color:green'>Right answer!!!</p>";
       return ;
     }
     
  }
-  document.getElementById("wrong").innerHTML="Wrong answer!!!";
-   var element = document.createElement("input");
-element.setAttribute("type", 'button');
-element.setAttribute("value", "Get Correct Sentence");
-element.setAttribute("id", "correct_sentence");
-var foo = document.getElementById("get_correct");
-foo.appendChild(element);
+ document.getElementById("right").style.display='';
+  document.getElementById("right").innerHTML="<p style='color:red'>Wrong answer!!!</p>";
+  document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='get_answers()'>get correct sentence</button>"
+ document.getElementById("answers").innerHTML="";
 
 }
 function hin_correctness(){
-  document.getElementById("wrong").innerHTML="";
-  document.getElementById("wrong").style.display='';
+  
   document.getElementById("right").innerHTML="";
-  document.getElementById("right").style.display='';
-  document.getElementById('hin_correct_sen').style.display='';
   var txt=hin_sentence.trim(); 
   var q=array2[y].length;
   var m=0;
@@ -315,16 +293,43 @@ function hin_correctness(){
     str=array2[y][i];  
     var m=str.localeCompare(txt);
     if(m==0){
-      document.getElementById("right").innerHTML="Right answer!!!";
+     document.getElementById("right").style.display='';
+      document.getElementById("right").innerHTML="<p style='color:green'>Right answer!!!</p>";
       return ;
     } 
  }
-  document.getElementById("wrong").innerHTML="Wrong answer!!!";
-   var element = document.createElement("input");
-element.setAttribute("type", 'button');
-element.setAttribute("value", "Get Correct Sentence");
-element.setAttribute("id", "correct_sentence2");
-var foo = document.getElementById("hin_correct_sen");
-foo.appendChild(element);
+ document.getElementById("right").style.display='';
+  document.getElementById("right").innerHTML="<p style='color:red'>Wrong answer!!!</p>";
+ 
+document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='get_answers()'>Get Correct Sentence</button>"
+document.getElementById("answers").innerHTML="";
+}
+function get_answers(){
+  ans="";
+  document.getElementById("answers").innerHTML="";
+  var n=0;
+  if(strUser=="English"){
+    n=array1[x].length;
+   
+    document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='hide_sentence()'>Hide the correct Sentence</button><br>"
+    for(i=0;i<n;i++){
+      ans+= array1[x][i]+"<br>";
+    }
+    document.getElementById("answers").innerHTML = ans;
+  }
+  if(strUser=='Hindi'){
+    n=array2[y].length;
+        document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='hide_sentence()'>Hide the correct Sentence</button><br>"
+     for(i=0;i<n;i++){
+      ans+= array2[y][i]+"<br>";
+    }
+    document.getElementById("answers").innerHTML = ans;
+  }
+}
+function hide_sentence() {
+
+document.getElementById("answers").innerHTML="";
+
+ document.getElementById("get_correct").innerHTML="<button id='correct_sentence' onclick='get_answers()'>Get Answers</button>"
 
 }
